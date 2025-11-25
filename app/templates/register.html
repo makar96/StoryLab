@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/login_register.css')}}">
+{% endblock%}
+
+Блок для сообщений
+{% block content %}
+    <div class="container_login">
+    <p class="login_to_website"><label>Регистрация</label></p>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages  %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<form action="/register" method="post" class="form-contact">
+    <p><label>Имя: </label> <input type="text" name="name" value="" required>
+    <p><label>Фамилия: </label> <input type="text" name="surname" value="" required>
+    <p><label>Email: </label> <input type="text" name="email" value="" required>
+    <p><label>Пароль: </label> <input type="password" name="password" value="" required>
+    <p><label>Повторите пароль: </label> <input type="password" name="password2" value="" required>
+    <p><input class="input" type="submit" value="Регистрация">
+</form>
+{% endblock %}

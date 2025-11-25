@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/user_edit.css')}}">
+{% endblock%}
+
+Блок для сообщений
+{% block content %}
+    <div class="container_login">
+
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages  %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+        <form action="{{ url_for('user_edit', user_id=current_user.id) }}" method="POST" class="form-contact">
+            <h1 class="login_to_website"><label>Мой блог</label></h1>
+            <p><label>Имя: </label> <input type="text" name="name" value="{{ user.name }}" required>
+            <p><label>Фамилия: </label> <input type="text" name="surname" value="{{ user.surname }}" required>
+            <p><label>Email: </label> <input type="text" name="email" value="{{ user.email }}" required>
+
+            {% if user.blogname %}
+                <p><label>Название блога: </label> <input type="text" name="blogname" value="{{ user.blogname }}">
+            {% else %}
+                <p><label>Название блога: </label> <input type="text" name="blogname" placeholder="Как будет называться ваш блог?">
+            {% endif %}
+
+            {% if user.description%}
+                <p><label>Описание блога: </label> <textarea name="description" placeholder="Напишите что-нибудь хорошее, чтобы заинтересовать читателей">{{ user.description }}</textarea>
+            {% else %}
+                <p><label>Описание блога: </label> <textarea name="description" placeholder="Напишите что-нибудь хорошее, чтобы заинтересовать читателей">{{ user.description }}</textarea>
+            {% endif %}
+        {#    <p><label>Пароль: </label> <input type="password" name="password" value="" required>#}
+        {#    <p><label>Повторите пароль: </label> <input type="password" name="password2" value="" required>#}
+            <div class="container-button">
+                 <button class="input" type="submit">Сохранить</button>
+{#                <p><input class="input" type="submit" value="Сохранить"></p>#}
+                <a href="{{ url_for('user', user_id=current_user.id) }}" class="cancellation">Отмена</a>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

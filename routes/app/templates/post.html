@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/post.css')}}">
+
+    {% endblock%}
+
+{% block content %}
+    <div class="container_body">
+
+        <div class="user_post">
+            <div class="user_image"></div>
+                <div class="user_info">
+                    <p>{{ post.user.name }} {{ post.user.surname }}</p>
+                    <small>{{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                </div>
+        </div>
+
+        <div class="container_post">
+
+            <div class="container_post_title">
+                <h1>{{ post.title }}</h1>
+                <small>Опубликовано: {{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+            </div>
+
+            <div class="container_post_content">
+                <p>{{ post.content }}</p>
+            </div>
+
+            <div class="container_post_theme">
+                <p>Тема: {{ post.theme.name }}</p>
+            </div>
+
+            <div class="container_post_footer">
+                <img class="like_post" src="{{ url_for('static', filename='like_post.png') }}" alt="Лайк">
+                <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+            </div>
+
+        </div>
+
+        <div class="create_post">
+            <a href="{{ url_for('create_post') }}">Создать новый пост</a>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base_theme.html" %}
+{% block title %}Технологии{% endblock %}
+
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_design_article_page.css')}}">
+    {% endblock%}
+
+
+{% block topic %}
+
+    <div class="topic_image">{% block theme_image %}<img src="{{ url_for('static', filename='technologies.jpg') }}">{% endblock %}</div>
+    <div class="topic_image_text">
+            <h1>{% block theme_name %}Технологии{% endblock %}</h1>
+    </div>
+
+{% endblock %}
+
+

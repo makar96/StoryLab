@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WorldBlog - это простой, но в то же время удобный Блог, где каждый сможет узнать что-то новое или рассказать о чем-то другим!">
+    <link rel="icon" href="{{ url_for('static', filename='icon_blog.jpg') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Home{% endblock %}</title>
+ <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <!-- Tiny -->
+{#    <script src="//cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>#}
+    {% block style %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    {% endblock%}
+</head>
+<header id="header" class="header_list" align="center">
+    {% block header %}
+    <div class="header_container_left">
+        <a href="/" class="logotip">StoryLab</a>
+{#            <nav>#}
+{#                <ul>#}
+{#                    <li><a href="/journeys">Топ</a></li>#}
+{#                    <li lass=""><a href="/articles">Статьи: {{ all_posts }} </a></li>#}
+{#                    <li lass=""><a href="/today">Сегодня: {{ posts_today }} </a></li>#}
+{#                </ul>#}
+{#            </nav>#}
+   </div>
+
+    <div class="header_container_right">
+        <form class="form_search" action="/search/" method="GET">
+            <input class="search" id="query" name="query" hx-target="#results" placeholder="Что будем искать?">
+        </form>
+{#        Панель пользователя#}
+<!-- {#    <a href = '/login' class="registry" type="button">Войти</a>#} -->
+        {% if current_user.is_authenticated %}
+            <div class="dropdown-base">
+                <input type="checkbox" class="dropdown-base-checkbox">
+                <div class="dropdown-base-label"></div>
+
+                <div class="dropdown-base-menu">
+                    <!-- Форма входа в блог -->
+                    <form action="{{ url_for('user', user_id=current_user.id) }}" method="GET" class="dropdown-base-form">
+                        <button type="submit" class="dropdown-base-item open-btn">Мой блог</button>
+                    </form>
+                             
+                    <!-- Форма для редактирования блога -->
+
+                    <form action="{{ url_for('user_edit', user_id=current_user.id) }}" method="POST" class="dropdown-base-form">
+                        <button type="submit" class="dropdown-base-item edit-btn">Редактировать блог</button>
+                    </form>
+
+                    <!-- Форма для удаления -->
+                    <form action="/create_post" method="GET" class="dropdown-base-form">
+                        <button type="submit" class="dropdown-base-item create-btn">Создать новую статью</button>
+                    </form>
+
+                     <!-- Форма для выхода -->
+                    <form action="/logout/" method="POST" class="dropdown-base-form">
+                        <button type="submit" class="dropdown-base-item exit-btn">Выйти</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <a href = '/login' class="registry" type="button">Войти</a>
+        {% endif %}
+    </div>
+
+
+    {% endblock %}
+</header>
+<body>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="site-footer">
+    {% block site_footer %}
+    <div>
+    </div>
+    <div>
+        <p>(c) 2025 Компания «ООО Макарчик-Топ». Все права защищены.</p>
+    </div>
+{% endblock %}
+</footer>
+</body>
+</html>

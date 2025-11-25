@@ -1,0 +1,339 @@
+html {
+    --scroll-behavior: smooth; /*Плавная прокрутка к якорям*/
+    scroll-behavior: smooth;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+   }
+html h1 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #0d0d0d;
+}
+
+html h2 {
+    font-size: 18px;
+    font-weight: 300;
+    color: #0d0d0d;
+}
+
+html p {
+    font-size: 16px;
+    color: #0d0d0d;
+}
+
+
+/*Шапка */
+
+header {
+    position: sticky;
+    background-color: rgb(255, 255, 255);
+    display: flex; /*Для центрирования*/
+    width: 100%; /*Для центрирования*/
+    height: 4em;
+    left: 0; /*Для центрирования*/
+    right: 0; /*Для центрирования*/
+    top: 0; /*Для центрирования*/
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.1);
+    margin: 0 auto;
+    z-index: 99999;
+}
+
+
+/* Левый контейрер хейдера */
+
+header .header_container_left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; 
+    width: 50%;
+    height: 4em;
+    background-color: rgba(204, 90, 101, 0);
+    top: 0;   
+}
+
+header nav ul {
+    position: relative;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+    margin: 0 auto;
+}
+
+header nav {
+    height: 100%;
+    background-color: rgba(192, 83, 83, 0);
+}
+
+nav ul li {
+        border-radius: 1em;
+    height: 4em;
+    transition: .6s;
+    display:flex;
+    align-items: center;
+
+
+}
+
+nav ul li:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+header nav ul li a {
+    display: flex; /* Используйте flex вместо inline-block */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(42, 42, 42, 0.91);
+    text-transform: uppercase;
+    padding: 0 1em;
+    height: 100%;
+    width: 100%;
+}
+
+
+/* Для адаптивности на смартфонах */
+@media (max-width: 1100px) {
+    header nav ul li a {
+        font-size: 16px;
+        padding: 0.5em 0.5em;
+    }
+}
+
+header .logotip {
+    display: flex; /* Используйте flex вместо inline-block */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center;
+    font-size: 25px;
+    text-decoration: none;
+    color: #111111;
+    font-family: Georgia, serif;
+    background-color: rgba(0, 166, 125, 0);
+    border-radius: 1em;
+    margin-left: 10em;
+
+    transition: .6s;
+}
+
+header .logotip:hover {
+    color: #0151b9;
+}
+
+/* Для адаптивности на смартфонах */
+@media (max-width: 1100px) {
+    header .logotip {
+        left: 5%;
+    }
+}
+
+/* Правый контейнер хейдера  */
+
+header .header_container_right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center; 
+    padding-right: 2%;
+    box-sizing: border-box;
+    width: 50%;
+    height: 4em;
+    background-color: #5acc8600;
+    top: 0;   
+}
+
+
+/*Поиск*/
+
+.form_search {
+    width: 60%;
+    position: relative;
+    background-color: rgba(255, 0, 0, 0);
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+header .search {
+    width: 12em;
+    height: 2.5em;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .7s;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3f3f3f;
+    background-color: #ffffff;
+    border-style:solid;
+    text-align: center;
+    border-radius: 2em;
+    margin-right: 10%;
+}
+
+/* Добавляйте цвет фона, когда вводы получают фокус */
+input[name=query]:focus {
+  background-color: #f3f3f3;
+  outline: none;
+  width: 20em;
+  
+}
+
+.registry {
+    position: relative;
+    display: flex;
+    height: 40px;
+    width: 5em;
+    border: 1px solid #8d8d8d;
+    background-color: rgb(255, 255, 255);
+    color: rgba(5, 5, 5, 0.91);
+    text-decoration: none;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .1s;
+    border-radius: 2em;
+}
+
+.registry:hover {
+      background-color: #f3f3f3;
+}
+
+/* Для адаптивности на смартфонах */
+@media (max-width: 1100px) {
+    header .search {
+        width: 10em;
+    }
+}
+
+/*Панель пользователя*/
+
+.dropdown-base-form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 9999;
+}
+
+
+.dropdown-base-form .dropdown-item {
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Остальные стили остаются такими же */
+.dropdown-base {
+    position: relative;
+    background-color: rgba(176, 31, 31, 0);
+    z-index: 9999;
+    display: inline-block;
+}
+
+.dropdown-base-checkbox {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.dropdown-base-label {
+  display: inline-block;
+  padding: 8px 12px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgb(66, 66, 66);
+  background-color: #ffffff;
+}
+
+.dropdown-base-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.dropdown-base-checkbox:checked ~ .dropdown-base-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-base-item {
+  display: block;
+  width: 300px;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 18px;
+  border-bottom: 1px solid #f5f5f5;
+    border-radius: 5px;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.dropdown-base-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-base-item:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.open-btn:hover {
+  color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.edit-btn:hover {
+  color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.create-btn:hover {
+  color: #168f32;
+  background-color: #daffe4;
+}
+
+.exit-btn:hover {
+  color: #dc3545;
+  background-color: #ffeaea;
+}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='main.css/search.css')}}">
+{% endblock%}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+{% if results %} <!-- если постов нет, показывает сообщение -->
+{% for result in results %} <!-- Добавлен цикл для перебора всех постов -->
+
+<div class="search_card">
+    <article class="search_card_article">
+        <a class="search_card_link" href="{{ url_for('view_post', post_id=result.id) }}" rel="opener dofollow"></a>
+        <div class="search_card_image">
+                    <!-- Новый блок для изображения -->
+                    <div class="image_post">
+                        {% set first_img_src = extract_first_image(result.content) %}
+                        {% if first_img_src %}
+                            <img src="{{ first_img_src }}" alt="Пост"/>
+                        {% endif %}
+                    </div>
+        </div>
+
+
+        <div class="search_card_content">
+            <div class="search_card_content_text">
+                <h1>{{ result.title[:50] }}{% if result.content|length > 100 %}...{% endif %}</h1>
+                <p>{{ result.content[:140] | safe }}{% if result.content|length > 100 %}...{% endif %}</p>
+            </div>
+
+            <div class="search_card_content_footer">
+                <small>{{ result.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                <img class="like_post" src="{{ url_for('static', filename='like_post.png') }}" alt="Лайк">
+                <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+            </div>
+        </div>
+    </article>
+</div>
+
+{% endfor %}
+{% else %}
+    <p>Пока нет постов. <a href="{{ url_for('create_post') }}">Создайте первый!</a></p>
+        {% endif %}
+
+{% endblock %}
+
+
+
+

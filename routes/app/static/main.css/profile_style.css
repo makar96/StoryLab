@@ -1,0 +1,165 @@
+
+/*Информация о пользователе*/
+
+.info_profile {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    width: 80%;
+    border: solid 2px rgba(164, 164, 164, 0.98);
+    margin: 1em auto;
+    border-radius: 2em;
+    top: 0;
+    background-color: rgba(112, 124, 133, 0);
+    align-items: center;
+    justify-content: flex-start;
+
+}
+
+.image_profile {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid 2px rgba(164, 164, 164, 0.98);
+    margin-left: 2em;
+}
+
+.about_profile {
+    margin-left: 2em;
+}
+
+.about_profile h1 {
+    font-size: 25px;
+    color: #363636;
+}
+
+.about_profile p {
+    font-size: 18px;
+    color: #151515;
+}
+
+
+/*Статьи*/
+
+.container_body {
+    position: relative;
+    width: 80%;
+    background-color: #00FFFF;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 колонки */
+    gap: 1% 1%; /* row-gap column-gap */
+    height: 100%;
+    background-color: rgba(151, 27, 234, 0);
+    top: 0%;
+    margin: 0 auto;
+}
+
+
+/* Стили для выпадающего меню */
+.dropdown-form {
+  display: block;
+  width: 100%;
+    z-index: 9999;
+}
+
+.dropdown-form .dropdown-item {
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Остальные стили остаются такими же */
+.dropdown {
+    position: absolute;
+    top: 1em;
+    left: 90%;
+    z-index: 9999;
+    display: inline-block;
+}
+
+.dropdown-checkbox {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.dropdown-label {
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.dropdown-checkbox:checked ~ .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  border-bottom: 1px solid #f5f5f5;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  transform: translateX(4px);
+}
+
+.edit-btn:hover {
+  color: #007bff;
+  background-color: #e3f2fd;
+}
+
+.delete-btn:hover {
+  color: #dc3545;
+  background-color: #ffeaea;
+}
+
+
+
+

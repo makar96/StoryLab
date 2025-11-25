@@ -1,0 +1,48 @@
+{% extends "create.html" %}
+{% block title %}Изменение статьи{% endblock %}
+{% block style %}<link rel="stylesheet" href="{{ url_for('static', filename='main.css/create.css')}}"> {% endblock%}
+
+{% block content %}
+
+<body>
+    <main>
+        <div class="container_body">
+    <div class="back_to_all_posts">
+            <a href="{{ url_for('user', user_id=current_user.id) }}" class="previous">&laquo; Назад к постам</a>
+    </div>
+
+    <div class="container_create_post">
+
+    <form method="POST">
+
+        <div>
+            <input type="text" id="title" name="title" value="{{ post.title }}" placeholder="Придуймайте заголовок" required>
+        </div>
+
+         <div>
+            <textarea id="content" name="content" placeholder="Начните писать текст" rows="5" required>{{ post.content }}</textarea>
+        </div>
+
+        <div class="theme_selector">
+            <label for="theme">Выберите тему:</label>
+            <select id="theme" name="theme" required>
+                <option value="">--Выберите тему--</option>
+                {% if themes %}
+                {% for theme in themes %}
+                    <option value="{{ theme.id }}">{{ theme.name }}</option>
+                {% endfor %}
+                {% else %}
+                {% endif %}
+            </select>
+        </div>
+                <div class="create_post">
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+
+    </div>
+        </div>
+    </main>
+</body>
+
+{% endblock %}

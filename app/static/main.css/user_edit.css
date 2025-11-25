@@ -1,0 +1,125 @@
+/* Поля ввода полной ширины */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 2px 0;
+    display: inline-block;
+    background: #f1f1f1;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    border: 1px solid #797979;
+    border-radius: 1em;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100%;
+    padding: 15px;
+    margin: 5px 0 2px 0;
+    display: inline-block;
+    background: #f1f1f1;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #797979;
+    border-radius: 1em;
+    box-sizing: border-box;
+}
+
+.container_login {
+    align-self: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 1em;
+    margin: 0 auto;
+
+    background-color: rgba(135, 182, 182, 0);
+}
+
+.login_to_website {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Стиль горизонтальной линейки */
+hr {
+    border: 1px solid #d2d0d0;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
+/* Добавляйте цвет фона, когда вводы получают фокус */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.flashes{
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 1em;
+}
+
+.form-contact p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #343434;
+}
+
+.container-button {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.input {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 45%;
+    opacity: 0.9;
+    font-size: 1rem;
+    border-radius: 1em;
+}
+
+.cancellation {
+    align-content: center;
+    text-align: center;
+    background-color: #af4c54;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 45%;
+    opacity: 0.9;
+    font-size: 1rem;
+    border-radius: 1em;
+    text-decoration: none;
+}
+
+.input:hover {
+  opacity:1;
+}
+
+.cancellation:hover {
+      opacity:1;
+}
+
+.register_link {
+    text-decoration: none;
+    color: #0473e7;
+}

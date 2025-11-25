@@ -1,0 +1,97 @@
+{% extends "home.html" %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_design_article_page.css')}}">
+{% endblock%}
+{% block content %}
+    <div class="container_list_themes">
+    {% block themes %}
+    <nav>
+       <ul class="ul_list-theme">
+           <li><a class="all_themes" href="/world">&equiv; Все темы</a></li>
+           <li><a class="theme_list" href="/topic/travel">Путешествия</a></li>
+           <li><a class="theme_list" href="/topic/technologies">Технологии</a></li>
+           <li><a class="theme_list" href="/topic/games">Гейминг</a></li>
+           <li><a class="theme_list" href="/about">Наука</a></li>
+           <li><a class="theme_list" href="/about">Искусство</a></li>
+           <li><a class="theme_list" href="/about">Спорт</a></li>
+           <li><a class="theme_list" href="/about">Кулинария</a></li>
+           <li><a class="theme_list" href="/about">Здоровье</a></li>
+           <li><a class="theme_list" href="/about">Образование</a></li>
+           <li><a class="theme_list" href="/about">Развлечения</a></li>
+       </ul>
+   </nav>
+    {% endblock %}
+</div>
+ <!-- Блок для темы -->
+  <div class="topic-container">
+      {% block topic %}
+
+      {% endblock %}
+  </div>
+
+  <!-- Основное содержимое -->
+
+
+<div class="container_body">
+
+            {% if posts %} <!-- если постов нет, показывает сообщение -->
+            {% for post in posts %} <!-- Добавлен цикл для перебора всех постов -->
+
+        <div class="post-card">
+    <article class="post-card__article">
+        <a class="post-card__link" href="{{ url_for('view_post', post_id=post.id) }}" target="_blank" rel="opener dofollow" aria-label="Читать пост '{{ post.title }}'"></a>
+
+        <!-- Блок изображения -->
+        <div class="post-card__image">
+            {% set first_img_src = extract_first_image(post.content) %}
+            {% if first_img_src %}
+                <img src="{{ first_img_src }}" alt="{{ post.title }}" loading="lazy"/>
+            {% else %}
+                <div class="post-card__image-placeholder"></div>
+            {% endif %}
+        </div>
+
+        <!-- Информация о пользователе -->
+        <div class="post-card__user">
+            <div class="post-card__user-avatar"></div>
+            <div class="post-card__user-info">
+                <p class="post-card__username">{{ post.user.blogname }}</p>
+                <time class="post-card__date" datetime="{{ post.created_at.isoformat() }}">
+                    {{ post.created_at.strftime('%d.%m.%Y %H:%M') }}
+                </time>
+            </div>
+        </div>
+
+        <!-- Контент поста -->
+        <div class="post-card__content">
+            <h2 class="post-card__title">{{ post.title[:50] }}{% if post.title|length > 50 %}...{% endif %}</h2>
+            <div class="post-card__excerpt">
+                {{ post.content|striptags|truncate(100) }}
+            </div>
+        </div>
+
+        <!-- Футер поста -->
+        <footer class="post-card__footer">
+            <button class="post-card__action post-card__action--like" aria-label="Лайкнуть пост">
+                <img src="{{ url_for('static', filename='like_post.png') }}" alt="" aria-hidden="true">
+            </button>
+            <button class="post-card__action post-card__action--comment" aria-label="Комментировать пост">
+                <img src="{{ url_for('static', filename='comment.png') }}" alt="" aria-hidden="true">
+            </button>
+            <p>{{ Comment.query.filter_by(post_id=post.id).count() }}</p>
+        </footer>
+    </article>
+</div>
+            {% endfor %}
+    {% else %}
+        <p>Пока нет постов. <a href="{{ url_for('create_post') }}">Создайте первый!</a></p>
+            {% endif %}
+
+
+</div>
+
+    {% endblock %}
+
+

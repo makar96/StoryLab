@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Авторизация{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/login_register.css')}}">
+
+{% endblock%}
+
+
+
+{% block content %}
+<div class="container_login">
+        <p class="login_to_website"><label>Вход</label></p>
+{#Блок для сообщений#}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages  %}
+                <li>{{ message }}</li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<form action="/login" method="post" class="form-contact">
+    <p><label>Email: </label></p>
+    <input type="text" name="email" value="" placeholder="Введите вашу почту" required>
+    <p><label>Пароль: </label></p>
+    <input type="password" name="password" value="" placeholder="Введите пароль"  required>
+<p><input type="checkbox" name="rename">  <label>Запомнить меня </label>
+<p><input class="input" type="submit" value="Войти">
+<hr>
+<p>Еще не зарегистрировались?</p>
+<p><a class="register_link" href="{{ url_for('register') }}">Создать аккаунт</a>
+</form>
+{% endblock %}
+
+</div>

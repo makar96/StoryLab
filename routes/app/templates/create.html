@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WorldBlog - это простой, но в то же время удобный Блог, где каждый сможет узнать что-то новое или рассказать о чем-то другим!">
+    <link rel="icon" href="{{ url_for('static', filename='icon_blog.jpg') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}
+         <link rel="stylesheet" href="{{ url_for('static', filename='main.css/create.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    {% endblock%}
+</head>
+
+{% block content %}
+
+<body>
+    <main>
+        <div class="container_body">
+            <div class="back_to_all_posts">
+                <a href="{{ url_for('user', user_id=current_user.id) }}" class="previous">&laquo; Назад</a>
+            </div>
+
+    <div class="container_create_post">
+
+    <form method="POST">
+
+        <div>
+            <input type="text" id="title" name="title" placeholder="Придуймайте заголовок" required>
+        </div>
+
+         <div>
+
+            <textarea id="content" name="content" placeholder="Начните писать текст" rows="5" required></textarea>
+        </div>
+
+        <div class="theme_selector">
+            <label class="theme_selector_name" for="theme">Выберите тему:</label>
+            <select class="theme_selector_option" id="theme" name="theme" required>
+                <option  value="">Выберите тему</option>
+                {% if themes %}
+                {% for theme in themes %}
+                    <option class="" value="{{ theme.id }}">{{ theme.name }}</option>
+                {% endfor %}
+                {% else %}
+                {% endif %}
+            </select>
+        </div>
+        <div class="create_post">
+            <button type="submit">Опубликовать</button>
+        </div>
+    </form>
+
+    </div>
+        </div>
+    </main>
+</body>
+
+{% endblock %}

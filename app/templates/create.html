@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WorldBlog - это простой, но в то же время удобный Блог, где каждый сможет узнать что-то новое или рассказать о чем-то другим!">
+    <link rel="icon" href="{{ url_for('static', filename='icon_blog.jpg') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tiny.cloud/1/g70dvby9pyqs5cvuag11952ik1raja6wqq0sr1l52ziwoexk/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+
+
+    {% block style %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/create.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    {% endblock%}
+
+<!-- Инициализация TinyMCE здесь -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            tinymce.init({
+                selector: '#content',
+                plugins: ['lists', 'link', 'image'],
+                toolbar: 'undo redo | blocks fontfamily | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+
+                menubar: false,
+                language: 'ru',
+                statusbar: false,
+                autoresize_bottom_margin: 0,
+                paste_data_images: false,
+                image_dimensions: false,
+                content_style: `
+                    img {
+                    max-width: 700px !important;
+                    border-radius: 1em;
+                    height: auto !important;
+                    display: block;
+                    }`,
+            });
+        });
+    </script>
+
+</head>
+
+{% block content %}
+
+<body>
+    <main>
+        <div class="container_body">
+
+            <div class="header-created">
+
+                <div class="back_to_all_posts">
+                    <a href="{{ url_for('user', user_id=current_user.id) }}" class="previous">&laquo; Назад</a>
+                </div>
+
+                <!-- Информация о пользователе -->
+                <div class="post-card__user">
+                    <div class="post-card__user-avatar"></div>
+                    <div class="post-card__user-info">
+                        <p class="post-card__username">{{ current_user.blogname }}</p>
+                    </div>
+                </div>
+
+        </div>
+
+
+    <div class="container_create_post">
+
+    <form method="POST">
+
+        <div>
+            <input type="text" id="title" name="title" placeholder="Придуймайте заголовок"
+{#                   Убираем cookies чтобы не было автозаполнения#}
+                   required autocomplete="off"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   spellcheck="false">
+        </div>
+
+         <div>
+            <textarea id="content" name="content" autocomplete="off" placeholder="Начните писать текст" rows="5"></textarea>
+         </div>
+        <div class="footer-created">
+
+            <div class="create_post">
+                <button type="submit">Опубликовать</button>
+            </div>
+
+            <div class="footer-create__theme_selector">
+                <label class="theme_selector_name" for="theme"></label>
+                <select class="theme_selector_option" id="theme" name="theme" required>
+                    <option  value="">Выберите тему</option>
+                    {% if themes %}
+                    {% for theme in themes %}
+                        <option class="" value="{{ theme.id }}">{{ theme.name }}</option>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+
+    </form>
+
+    </div>
+        </div>
+    </main>
+</body>
+
+{% endblock %}

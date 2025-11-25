@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/post.css')}}">
+
+    {% endblock%}
+
+{% block content %}
+    <div class="container_body">
+
+        <div class="user_post">
+            <div class="user_image"></div>
+                <div class="user_info">
+                    <a href="{{ url_for('user', user_id=post.user.id) }}">{{ post.user.blogname }}</a>
+                </div>
+        </div>
+
+        <div class="container_post">
+
+            <div class="container_post_title">
+                <h1>{{ post.title }}</h1>
+                <small>Опубликовано: {{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+            </div>
+
+            <div class="container_post_content">
+                <p>{{ post.content | safe }}</p>
+            </div>
+
+            <div class="container_post_theme">
+                <p>Тема: {{ post.theme.name }}</p>
+            </div>
+
+            <div class="container_post_footer">
+
+                <form action="/toggle_like/{{ post.id }}" method="POST" class="post-card__action">
+                    <button type="submit" class="post-card__action--like" aria-label="Лайкнуть пост">
+                        <img src="{{ url_for('static', filename='like_post.png') }}" alt="" aria-hidden="true">
+                    </button>
+                   <p>{{ Like.query.filter_by(post_id=post.id).count() }}</p>
+                </form>
+                <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+                <p>{{ num_comments }}</p>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="container_footer">
+
+{#Комментари#}
+
+        <form id="comments" method="POST" action="{{ url_for('comment_add', post_id=post.id) }}" autocomplete="off" novalidate>
+            <div class="container-comments">
+                <div class="create_comment">
+                    <textarea id="content" name="text" placeholder="Начните писать комментарий" rows="5" required></textarea>
+                    {% if current_user.is_authenticated %}
+                    <button type="submit">Отправить комментарий</button>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+
+                {% for comment in comments %}
+
+                    <div class="autor-comment">
+                    <!--Выпадающее меню-->
+                        {% if current_user.is_authenticated %}
+                        <div class="dropdown">
+                            <input type="checkbox" class="dropdown-checkbox">
+                                <div class="dropdown-label">⋮</div>
+                            <div class="dropdown-menu">
+                    <!-- Форма для редактирования -->
+                                <form method="POST" action="{{ url_for('comment_edit', comment_id=comment.id) }}" class="dropdown-form">
+
+                                    <button type="submit" class="dropdown-item edit-btn">✏️ Редактировать</button>
+                                </form>
+
+                    <!-- Форма для удаления -->
+                                 <form  method="POST" action="{{ url_for('comment_delete', comment_id=comment.id) }}" class="dropdown-form">
+                                    <button type="submit" class="dropdown-item delete-btn"
+                                         onclick="return confirm('Удалить этот комментарий?')">🗑️ Удалить</button>
+                                 </form>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="comment-user-image">
+                            <div class="image-profile"></div>
+                        </div>
+                        <div class="container-comment-column">
+                            <div class="comment-user-info">
+                                <p>{{ comment.user.blogname }}</p>
+                                <small>{{ comment.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                            </div>
+                            <div name="text" class="text-comment"><p>{{ comment.text }}</p></div>
+                        </div>
+                    </div>
+                {% endfor %}
+    </div>
+
+{#    Проверка на спам#}
+{#    В свойствах стоит focus, из-за этого при открытии страницы происходит скролл до инпута#}
+{#<script>#}
+{#    document.addEventListener("DOMContentLoaded", function() {#}
+{#        var textarea = document.getElementById('content');#}
+{#        textarea.focus();#}
+{#    });#}
+{#</script>#}
+{% endblock %}

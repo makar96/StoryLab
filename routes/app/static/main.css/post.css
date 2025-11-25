@@ -1,0 +1,172 @@
+.container_body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: rgba(15, 116, 168, 0);
+    padding: 0;
+}
+
+/*Кто выложил пост*/
+
+.user_post {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-self: center;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 1em;
+    padding-left: 1em;
+    max-width: 100%;
+    height: 15%;
+    background-color: rgba(136, 58, 58, 0);
+}
+.user_image {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #8d8d8d;
+    background-color: rgba(0, 255, 0, 0);
+
+}
+.user_info {
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    margin-left: 1em;
+    padding: 0;
+    width: 70%;
+    height: 100%;
+    z-index: 9999;
+    color: black;
+    font-size: 16px;
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.user_info p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3d3d3d;
+    padding: 0;
+    margin: 0;
+}
+
+.user_info small {
+    font-weight: 600;
+    color: #595959;
+}
+
+
+.container_post {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgba(105, 31, 68, 0);
+}
+
+.container_post .container_post_title {
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    height: 25%;
+    background-color: rgba(15, 116, 168, 0);
+    padding: 0;
+}
+
+.container_post .container_post_title h1 {
+    align-self: flex-start;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #212121;
+}
+
+.container_post .container_post_title p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #232323;
+    margin-top: 0;
+}
+
+.container_post .container_post_title small {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #707070;
+}
+
+.container_post .container_post_content p{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: justify;
+    font-size: 20px;
+    line-height: 1.5;
+    background-color: rgba(0, 255, 0, 0);
+    white-space: pre-wrap; /* Чтобы учитывались пробелы и перености текста -*/
+}
+
+.container_post_theme p{
+    font-size: 1rem;
+    color: #565656;
+    font-weight: 600;
+}
+
+.container_post_footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 5%;
+    margin-top: 1em;
+    background-color: rgba(0, 173, 156, 0);
+}
+
+.container_post_footer .like_post {
+    align-self: center;
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+
+}
+
+.container_post_footer .comment_post {
+    align-self: center;
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 3em;
+}
+
+.create_post {
+    position: relative;
+    display: flex;
+    margin-top: 2em;
+    width: 100%;
+    height: 3em;
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.create_post a {
+    align-self: center;
+    align-content: center;
+    text-decoration: none;
+    width: 13em;
+    height: 3em;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fdfdfd;
+    /*border: 2px solid #797979;*/
+    background-color: rgb(63, 63, 63);
+    cursor: pointer;
+    border-radius: 2em;
+    text-align: center;
+    box-sizing:border-box;
+    transition: .6s;
+}
+.create_post a:hover {
+    background-color: rgb(101, 101, 101);
+}

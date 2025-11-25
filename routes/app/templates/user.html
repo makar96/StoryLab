@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Привет, {{ current_user.name }} {{ current_user.surname }}{% endblock %}
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_design_post.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/profile_style.css')}}">
+    {% endblock%}
+
+{% block content %}
+
+<div class="info_profile">
+
+    <div class="image_profile"></div>
+    <div class="about_profile">
+        <h1>{{ current_user.name }}</h1>
+        <p>Привет, это канал об играх...</p>
+    </div>
+</div>
+
+<div class="container_body">
+
+            {% if posts %} <!-- если постов нет, показывает сообщение -->
+            {% for post in posts %} <!-- Добавлен цикл для перебора всех постов -->
+
+        <div class="container_content" id="{{ post.id }}">
+
+            <article class="container_content_article">
+
+                    <div class="dropdown">
+                        <input type="checkbox" class="dropdown-checkbox">
+                        <div class="dropdown-label">⋮</div>
+
+                        <div class="dropdown-menu">
+                    <!-- Форма для редактирования -->
+                             <form action="/post/{{ post.id }}/edit" method="GET" class="dropdown-form">
+                                <button type="submit" class="dropdown-item edit-btn">✏️ Редактировать</button>
+                             </form>
+
+                    <!-- Форма для удаления -->
+                            <form action="/post/{{ post.id }}/delete" method="POST" class="dropdown-form">
+                                 <button type="submit" class="dropdown-item delete-btn"
+                                     onclick="return confirm('Удалить этот пост?')">🗑️ Удалить</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+            <article class="container_content_article">
+                    <a class="container_content_link" href="{{ url_for('view_post', post_id=post.id) }}" target="_blank" rel="opener dofollow"></a>
+                    <div class="image_post">{{image_post}}</div>
+
+                    <div class="user_post">
+                        <div class="user_image"></div>
+                        <div class="user_info">
+                            <p>{{ post.user.name }} {{ post.user.surname }}</p>
+                            <small>{{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="content_post">
+                         <h1>{{ post.title[:50] }}{% if post.content|length > 100 %}...{% endif %}</h1>
+                         <p>{{ post.content[:100] }}{% if post.content|length > 100 %}...{% endif %}</p>
+                    </div>
+
+                    <div class="footer_post">
+                        <img class="like_post" src="{{ url_for('static', filename='like_post.png') }}" alt="Лайк">
+                        <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+                    </div>
+
+            </article>
+
+            </article>
+        </div>
+            {% endfor %}
+    {% else %}
+        <p>Пока нет постов. <a href="{{ url_for('create_post') }}">Создайте первый!</a></p>
+            {% endif %}
+
+
+</div>
+{% endblock %}
+
+
+

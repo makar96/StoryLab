@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Привет, {{ current_user.name }} {{ current_user.surname }}{% endblock %}
+    {% block style %}
+{#        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_design_post.css')}}">#}
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css/profile_style.css')}}">
+    {% endblock%}
+
+{% block content %}
+
+<div class="info_profile">
+    <div class="image_profile"></div>
+    <div class="about_profile">
+        <h1>{{ user.blogname }}</h1>
+        <p>{{ user.description }}</p>
+    </div>
+</div>
+
+<div class="container_body">
+
+            {% if posts %} <!-- если постов нет, показывает сообщение -->
+            {% for post in posts %} <!-- Добавлен цикл для перебора всех постов -->
+
+        <div class="post-card" id="{{ post.id }}">
+    <article class="post-card__article">
+        <a class="post-card__link" href="{{ url_for('view_post', post_id=post.id) }}" rel="opener dofollow" aria-label="Читать пост '{{ post.title }}'"></a>
+{#        {% if current_user.is_authenticated %}#}
+            {% if user.id==current_user.id %}
+        <div class="dropdown">
+            <input type="checkbox" class="dropdown-checkbox">
+            <div class="dropdown-label">⋮</div>
+
+            <div class="dropdown-menu">
+                <!-- Форма для редактирования -->
+                <form action="/post/{{ post.id }}/edit" method="GET" class="dropdown-form">
+                    <button type="submit" class="dropdown-item edit-btn">✏️ Редактировать</button>
+                </form>
+
+                <!-- Форма для удаления -->
+                <form action="/post/{{ post.id }}/delete" method="POST" class="dropdown-form">
+                    <button type="submit" class="dropdown-item delete-btn"
+                            onclick="return confirm('Удалить этот пост?')">🗑️ Удалить</button>
+                    </form>
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Блок изображения -->
+        <div class="post-card__image">
+            {% set first_img_src = extract_first_image(post.content) %}
+            {% if first_img_src %}
+                <img src="{{ first_img_src }}" alt="{{ post.title }}" loading="lazy"/>
+            {% else %}
+                <div class="post-card__image-placeholder"></div>
+            {% endif %}
+        </div>
+
+        <!-- Информация о пользователе -->
+        <div class="post-card__user">
+            <div class="post-card__user-avatar"></div>
+            <div class="post-card__user-info">
+                <p class="post-card__username">{{ post.user.blogname }}</p>
+                <time class="post-card__date" datetime="{{ post.created_at.isoformat() }}">
+                    {{ post.created_at.strftime('%d.%m.%Y %H:%M') }}
+                </time>
+            </div>
+        </div>
+
+        <!-- Контент поста -->
+        <div class="post-card__content">
+            <h2 class="post-card__title">{{ post.title[:50] }}{% if post.title|length > 50 %}...{% endif %}</h2>
+            <div class="post-card__excerpt">
+                {{ post.content|striptags|truncate(100) }}
+            </div>
+        </div>
+
+        <!-- Футер поста -->
+        <footer class="post-card__footer">
+            <form action="/toggle_like/{{ post.id }}" method="POST" class="post-card__action">
+                <button type="submit" class="post-card__action--like" aria-label="Лайкнуть пост">
+                    <img src="{{ url_for('static', filename='like_post.png') }}" alt="" aria-hidden="true">
+                </button>
+            </form>
+            <p>{{ Like.query.filter_by(post_id=post.id).count() }}</p>
+            <a href="{{ url_for('view_post', post_id=post.id) }}#comments" class="post-card__action post-card__action--comment" aria-label="Комментировать пост">
+                <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+            </a>
+            <p>{{ Comment.query.filter_by(post_id=post.id).count() }}</p>
+        </footer>
+    </article>
+</div>
+            {% endfor %}
+    {% else %}
+        <p>Пока нет постов. <a href="{{ url_for('create_post') }}">Создайте первый!</a></p>
+            {% endif %}
+
+
+</div>
+{% endblock %}
+
+
+

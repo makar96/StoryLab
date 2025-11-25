@@ -1,0 +1,76 @@
+.topic-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 70%;
+    height: 20em;
+    border: solid 1px rgb(157, 157, 157);
+    border-radius: 2em;
+    top: 0;
+    margin: 0 auto 1em auto;
+    z-index: 10;
+}
+
+.topic-container .topic_image {
+    height: 80%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self:flex-start;
+    width: 100%;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+    background-color: rgba(0, 166, 125, 0.35);
+    z-index: 11;
+}
+
+.topic-container .topic_image img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+.topic-container .topic_image_text {
+    top: 0;
+    left: 0;
+    height: 15%;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: rgba(155, 74, 74, 0);
+    z-index: 15;
+    padding-left: 2em;
+}
+.topic-container .topic_image_text h1{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 3em;
+    font-weight: 800;
+    color: #4b4a4b;
+}
+
+
+/*Посты*/
+
+.container_body {
+    position: relative;
+    width: 70%;
+    background-color: #00FFFF;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 колонки */
+    gap: 1% 1%; /* row-gap column-gap */
+    height: 100%;
+    background-color: rgba(151, 27, 234, 0);
+    top: 0%;
+    margin: 0 auto;
+}
+
+
+
+
+

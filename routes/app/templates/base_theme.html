@@ -1,0 +1,76 @@
+{% extends "home.html" %}
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/home.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_page.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css/base_design_article_page.css')}}">
+{% endblock%}
+{% block content %}
+    <div class="container_list_themes">
+    {% block themes %}
+    <nav>
+       <ul class="ul_list-theme">
+           <li><a class="all_themes" href="/world">&equiv; Все темы</a></li>
+           <li><a class="theme_list" href="/topic/travel">Путешествия</a></li>
+           <li><a class="theme_list" href="/topic/technologies">Технологии</a></li>
+           <li><a class="theme_list" href="/about">Наука</a></li>
+           <li><a class="theme_list" href="/about">Искусство</a></li>
+           <li><a class="theme_list" href="/about">Спорт</a></li>
+           <li><a class="theme_list" href="/about">Кулинария</a></li>
+           <li><a class="theme_list" href="/about">Здоровье</a></li>
+           <li><a class="theme_list" href="/about">Образование</a></li>
+           <li><a class="theme_list" href="/about">Развлечения</a></li>
+       </ul>
+   </nav>
+    {% endblock %}
+</div>
+ <!-- Блок для темы -->
+  <div class="topic-container">
+      {% block topic %}
+
+      {% endblock %}
+  </div>
+
+  <!-- Основное содержимое -->
+
+
+<div class="container_body">
+
+            {% if posts %} <!-- если постов нет, показывает сообщение -->
+            {% for post in posts %} <!-- Добавлен цикл для перебора всех постов -->
+
+        <div class="container_content">
+            <article class="container_content_article">
+                    <a class="container_content_link" href="{{ url_for('view_post', post_id=post.id) }}" target="_blank" rel="opener dofollow"></a>
+                    <div class="image_post">{{image_post}}</div>
+
+                    <div class="user_post">
+                        <div class="user_image"></div>
+                        <div class="user_info">
+                            <p>{{ post.user.name }} {{ post.user.surname }}</p>
+                            <small>{{ post.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="content_post">
+                         <h1>{{ post.title[:50] }}{% if post.content|length > 100 %}...{% endif %}</h1>
+                         <p>{{ post.content[:100] }}{% if post.content|length > 100 %}...{% endif %}</p>
+                    </div>
+
+                    <div class="footer_post">
+                        <img class="like_post" src="{{ url_for('static', filename='like_post.png') }}" alt="Лайк">
+                        <img class="comment_post" src="{{ url_for('static', filename='comment.png') }}" alt="Коммент">
+                    </div>
+
+            </article>
+        </div>
+            {% endfor %}
+    {% else %}
+        <p>Пока нет постов. <a href="{{ url_for('create_post') }}">Создайте первый!</a></p>
+            {% endif %}
+
+
+</div>
+
+    {% endblock %}
+
+
